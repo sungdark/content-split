@@ -1,0 +1,51 @@
+[
+  {
+    "weighted_score": 0.6391,
+    "quality_rating": "fair",
+    "scores": {
+      "completeness": 0.1427,
+      "format_compliance": 1.0,
+      "coverage": 0.775,
+      "clarity": 0.75,
+      "validity": 0.9
+    },
+    "feedback": [
+      "Detected format: markdown.",
+      "Improve completeness (current 0.14)."
+    ],
+    "pass_threshold": false
+  },
+  {
+    "weighted_score": 0.7188,
+    "quality_rating": "fair",
+    "scores": {
+      "completeness": 0.3127,
+      "format_compliance": 1.0,
+      "coverage": 1.0,
+      "clarity": 0.5,
+      "validity": 1.0
+    },
+    "feedback": [
+      "Detected format: json.",
+      "Improve completeness (current 0.31).",
+      "Improve clarity (current 0.50)."
+    ],
+    "pass_threshold": true
+  },
+  {
+    "weighted_score": 0.5965,
+    "quality_rating": "poor",
+    "scores": {
+      "completeness": 0.0382,
+      "format_compliance": 0.85,
+      "coverage": 0.7,
+      "clarity": 1.0,
+      "validity": 0.9
+    },
+    "feedback": [
+      "Detected format: text.",
+      "Improve completeness (current 0.04)."
+    ],
+    "pass_threshold": false
+  }
+]

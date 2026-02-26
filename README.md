@@ -37,6 +37,16 @@ curl -X POST http://localhost:8080/api/repurpose \
 curl http://localhost:8080/api/usage -H "X-API-Key: cs_your_key"
 ```
 
+### Quality Scoring (Bounty #1)
+```bash
+curl -X POST http://localhost:8080/api/quality/score \
+  -H "Content-Type: application/json" \
+  -d '{"submission":"# Proposal\n- goal: ...\n- approach: ...\n- result: ...\n- risk: ...\n- timeline: ...\n- test: ..."}'
+```
+
+Returns:
+`{weighted_score, quality_rating, scores:{...}, feedback:[...], pass_threshold}`
+
 ## 🎯 Platforms
 
 | Platform | Output |

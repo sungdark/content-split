@@ -17,6 +17,7 @@ from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from middleware import validate_api_key, track_usage, get_usage_stats, get_or_create_key, PLANS
+from scoring import QualityScorer
 
 app = FastAPI(
     title="ContentSplit",
@@ -55,6 +56,14 @@ class RepurposeResponse(BaseModel):
     results: dict
     hashtags: Optional[dict] = None
     created_at: str
+
+
+class QualityScoreRequest(BaseModel):
+    submission: str = Field(..., min_length=1, description="Submission content: JSON, markdown, code, or text")
+
+
+class QualityBenchmarkRequest(BaseModel):
+    submissions: list[str] = Field(..., min_length=1, description="Batch submissions for benchmark")
 
 
 # ── Content Generation (using prompts, model-agnostic) ────────────────────
@@ -384,6 +393,19 @@ async def list_platforms():
         "tones": ["professional", "casual", "witty", "technical", "friendly"],
         "languages": ["en", "pt", "es"],
     }
+
+
+quality_scorer = QualityScorer()
+
+
+@app.post("/api/quality/score")
+async def quality_score(req: QualityScoreRequest):
+    return quality_scorer.score(req.submission)
+
+
+@app.post("/api/quality/benchmark")
+async def quality_benchmark(req: QualityBenchmarkRequest):
+    return quality_scorer.benchmark(req.submissions)
 
 
 @app.get("/", response_class=HTMLResponse)
